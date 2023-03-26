@@ -15,6 +15,10 @@
     let stop = true;
     let ez = false;
     let speed = false;
+    let speed2 = false;
+
+    let speed1;
+    let speedBIS;
 
     let score = 0;
     let score2 = 0;
@@ -63,8 +67,8 @@
         if (y < 0) {
             y = 0;
         }
-        if (y > window.innerHeight - 150) {
-            y = window.innerHeight - 150;
+        if (y > window.innerHeight - 102) {
+            y = window.innerHeight - 102;
         }
 
         if (x2 < window.innerWidth / 2 + window.innerWidth / 23) {
@@ -76,8 +80,8 @@
         if (y2 < 0) {
             y2 = 0;
         }
-        if (y2 > window.innerHeight - 150) {
-            y2 = window.innerHeight - 150;
+        if (y2 > window.innerHeight - 102) {
+            y2 = window.innerHeight - 102;
         }
     }
     function start(params) {
@@ -87,6 +91,9 @@
         setTimeout(() => {
             speed = true;
         }, 10000);
+        setTimeout(() => {
+            speed2 = true;
+        }, 30000);
         
     }
     onMount(() => {
@@ -124,7 +131,7 @@
                 goal();
             }, 1000);
         }
-        if (ballY < 0 || ballY > window.innerHeight - ballSize - 58) {
+        if (ballY < 0 || ballY > window.innerHeight - ballSize - 7) {
             ballSpeedY = -ballSpeedY;
         }
 
@@ -138,6 +145,7 @@
             if (stop !== true) return;
             stop = false;
             ballSpeedX = -ballSpeedX * 2;
+			x2 += 10
             if (ballSpeedY > 0) {
                 ballSpeedY = -(Math.floor(Math.random() * 3) + 2);
             } else {
@@ -151,6 +159,14 @@
                         ballSpeedX = ballSpeedX + 2;
                     } else {
                         ballSpeedX = ballSpeedX - 2;
+                    }
+                }
+				if (speed2 == true) {
+                    if (ballSpeedX == 9 || ballSpeedX == -9) return;
+                    if (ballSpeedX > 0) {
+                        ballSpeedX = ballSpeedX + 3;
+                    } else {
+                        ballSpeedX = ballSpeedX - 3;
                     }
                 }
             }, 170);
@@ -167,6 +183,7 @@
             if (stop !== true) return;
             stop = false;
             ballSpeedX = -ballSpeedX * 2;
+			x -= 10
             if (ballSpeedY > 0) {
                 ballSpeedY = -(Math.floor(Math.random() * 3) + 2);
             } else {
@@ -182,6 +199,14 @@
                         ballSpeedX = ballSpeedX - 2;
                     }
                 }
+				if (speed2 == true) {
+                    if (ballSpeedX == 9 || ballSpeedX == -9) return;
+                    if (ballSpeedX > 0) {
+                        ballSpeedX = ballSpeedX + 3;
+                    } else {
+                        ballSpeedX = ballSpeedX - 3;
+                    }
+                }
             }, 170);
             setTimeout(() => {
                 stop = true;
@@ -191,9 +216,17 @@
     
     function goal() {
         speed = false;
-        setTimeout(() => {
+        speed2 = false;
+		clearTimeout(speed1);
+		clearTimeout(speedBIS);
+        speed1 = setTimeout(() => {
             speed = true;
+			console.log(speed)
         }, 10000);
+        speedBIS = setTimeout(() => {
+            speed2 = true;
+			console.log(speed2)
+        }, 30000);
         var start = Math.round(Math.random());
         ballSpeedX = 4;
 
@@ -206,8 +239,8 @@
     }
     
     $: match = ez ? `transition: all 0.8s;  opacity: 0;` : ` display: flex; `;
-    $: style = `transform: translate(${x}px, ${y}px);`;
-    $: style2 = `transform: translate(${x2}px, ${y2}px);`;
+    $: style = `transform: translate(${x}px, ${y}px); transition: all 0s;`;
+    $: style2 = `transform: translate(${x2}px, ${y2}px); transition: all 0s;`;
     $: ballStyle = `transform: translate(${ballX}px, ${ballY}px); width: ${ballSize}px; height: ${ballSize}px; border-radius: 50%; background-color: azure;`;
 </script>
 
