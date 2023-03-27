@@ -5,7 +5,7 @@
     let y = 280;
     let x2 = 1200;
     let y2 = 280;
-    let step = 5;
+    let step = 4;
     let keysPressed = new Set();
     let ballX = 730;
     let ballY = 300;
@@ -74,8 +74,8 @@
         if (x2 < window.innerWidth / 2 + window.innerWidth / 23) {
             x2 = window.innerWidth / 2 + window.innerWidth / 23;
         }
-        if (x2 > window.innerWidth - 18) {
-            x2 = window.innerWidth - 17;
+        if (x2 > window.innerWidth - 230) {
+            x2 = window.innerWidth - 230;
         }
         if (y2 < 0) {
             y2 = 0;
@@ -137,9 +137,9 @@
 
         // Rebond de la balle sur les blocs
         if (
-            ballX <= x2 + 17 &&
+            ballX <= x2 + 230 &&
             ballY + ballSize >= y2 &&
-            ballY <= y2 + 100 &&
+            ballY <= y2 + 400 &&
             ballX + ballSize >= x2
         ) {
             if (stop !== true) return;
@@ -175,9 +175,9 @@
             }, 500);
         }
         if (
-            ballX <= x + 17 &&
+            ballX <= x + 230 &&
             ballY + ballSize >= y &&
-            ballY <= y + 100 &&
+            ballY <= y + 400 &&
             ballX + ballSize >= x
         ) {
             if (stop !== true) return;
@@ -241,7 +241,7 @@
     $: match = ez ? `transition: all 0.8s;  opacity: 0;` : ` display: flex; `;
     $: style = `transform: translate(${x}px, ${y}px); transition: all 0s;`;
     $: style2 = `transform: translate(${x2}px, ${y2}px); transition: all 0s;`;
-    $: ballStyle = `transform: translate(${ballX}px, ${ballY}px); width: ${ballSize}px; height: ${ballSize}px; border-radius: 50%; background-color: azure;`;
+    $: ballStyle = `transform: translate(${ballX}px, ${ballY}px); width: ${ballSize}px; height: ${ballSize}px; border-radius: 50%; background-color: white; border: solid 3px black;`;
 </script>
 
 <p class="score" style="display: flex">{score} : {score2}</p>
@@ -249,16 +249,19 @@
 
 <div style="height: 100vh; width: 100vw;">
     <div class="bloc" {style} />
-    <div class="bloc" id="bloc2" style={style2} />
+    <div class="bloc" id="bloc22" style={style2} />
     <div class="balle" style={ballStyle} />
 </div>
 
 <style>
+   
     .bloc {
         position: absolute;
-        background-color: red;
-        width: 17px;
-        height: 100px;
+        background-image: url(https://cdn.discordapp.com/attachments/981627748382543952/1069758149428523038/helldris_2.png);
+        width: 230px;
+        height: 400px;
+        background-size: cover;
+        
     }
     #bloc2 {
         background-color: green;

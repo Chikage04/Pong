@@ -6,6 +6,10 @@ html, body {
 
 body {
 	overflow: hidden;
+	background-image: url(https://cdn.discordapp.com/attachments/979801797248024656/1090004118673834027/Sans_titre-2.png);
+background-size: cover;
+backdrop-filter: brightness(0.54);
+
 	background-color: #020618;
 	color: #efefef;
 	margin: 0;
